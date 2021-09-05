@@ -71,7 +71,7 @@ public class HomeController {
         }
         String password = loginFormDTO.getPassword();
 
-        if (!theUser.isEncodedPasswordEqualsInputPassword(password)) {
+        if (!theUser.isMatchingPassword(password)) {
             errors.rejectValue("password", "password.invalid", "Invalid password");
             model.addAttribute("title", "Welcome to Closet Tracker");
             return "index";

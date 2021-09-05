@@ -86,6 +86,18 @@ public class User extends AbstractEntity {
         return id;
     }
 
+    public String getPwHash() {
+        return pwHash;
+    }
+
+    public void setPwHash(String pwHash) {
+        this.pwHash = pwHash;
+    }
+
+    public boolean isMatchingPassword(String password) {
+        return encoder.matches(password, pwHash);
+    }
+
     // Compare input password with its encoded password and assign it in pw_hash
     public boolean isEncodedPasswordEqualsInputPassword(String password) {
         String pwHashValue = encoder.encode(password);
