@@ -22,7 +22,22 @@ public class User extends AbstractEntity {
     public void AddSize(Size size)
     {
             this.sizes.add(size);
-    }*/
+    }
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="user_id")
+    private List<Item> items;
+
+    @ManyToMany
+    @JoinColumn(name="user_id")
+    private List<Item> items = new ArrayList<>();
+
+    @ManyToOne
+    private Item item;*/
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="user_id")
+    private List<Item> items;
 
     @Column(name = "user_id", nullable = false)
     private int id;
@@ -56,6 +71,14 @@ public class User extends AbstractEntity {
         this.email = email;
         this.password = password;
         this.pwHash = encoder.encode(password);
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 
     public String getUserName() {

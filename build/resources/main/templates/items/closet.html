@@ -1,32 +1,132 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head th:replace="fragments :: head"></head>
+<script type="text/javascript" th:src="@{/main.js}"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<head>
+    <div th:replace="fragments/header :: myHeader"></div>
+</head>
 <body class="container">
 
-<header th:replace="fragments :: navigation"></header>
+<!--<header th:replace="fragments :: navigation"></header>-->
 
+
+<div class="modal" tabindex="-1" role="dialog" id="deleteModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close">
+                </button>
+            </div>
+        </div>
+        <div class="modal-body">
+            <p>Are you sure you want to delete this item?</p>
+        </div>
+        <div class="modal-footer">
+            <a href="" class="btn btn-primary" id="delRef">Yes, Delete</a>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Confirm Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this item?</p>
+            </div>
+            <div class="modal-footer">
+                <a href="/items/delete?itemId=${itemId}" class="btn btn-primary" id="delRef1">Yes, Delete</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<form method="post" action="/items/search" >
+    <div class="topnav">
+    <div class="search-container">
+        <form >
+            <input type="text" placeholder="Search by item name.." name="itemName">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+    </div>
+<!--<table>
+    <tr>
+        <td width="80%">
+        </td>
+        <td width="20%">
+            <label>Search</label>
+            <input  name="itemName"/>
+            <input type="submit" value="Search" class="btn btn-success" />
+        </td>
+    </tr>
+</table>
+    <div class="topnav">
+        <a class="active" href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <div class="search-container">
+            <form action="/action_page.php">
+                <input type="text" placeholder="Search.." name="search">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+    </div>
+</form>-->
+    <div  class="tableFixHead" th:if="${not #lists.isEmpty(items)}" >
 <table class="table table-borderless table-hover">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Clothing type</th>
-            <!--<th>Item location</th>-->
+            <th>Item Image</th>
+            <th>Item Name</th>
+           <!-- <th>Type</th>
             <th>Color</th>
             <th>Size</th>
-            <th>Season</th>
-            <th>Item Image</th>
+            <th>Season</th>-->
+            <th>View Item</th>
+            <th>Edit Item</th>
+            <th>Delete Item</th>
         </tr>
     </thead>
-    <tr th:each="item : ${items}">
-        <td><a th:href="'/items/details?itemId=' + ${item.id}" th:text="${item.itemName}"></a></td>
-        <td th:text="${item.type}"></td>
-        <!--<td th:text="${item.location}"></td>-->
+    <tr th:each="item : ${items}" th:if="${not #lists.isEmpty(items)}" >
+        <td> <img width="150" height="150" class="card-img-top" th:src="@{${'/items/display/image/' + item.id}}" style="width:300px"></td>
+        <td th:text="${item.itemName}"></td>
+        <!--<td th:text="${item.type}"></td>
         <td th:text="${item.color.displayName}"></td>
         <td th:text="${item.size}"></td>
-        <td th:text="${item.season.displayName}"></td>
-        <td> <img class="card-img-top" th:src="@{${'/items/display/image/' + item.id}}" style="width:300px"></td>
+        <td th:text="${item.season.displayName}"></td>-->
+        <td><a th:href="'/items/viewItem?itemId=' + ${item.id}" class="btn btn-primary btn-sm" id="viewButton">View</a></td>
+        <td><a th:href="'/items/edit?itemId=' + ${item.id}" class="btn btn-warning btn-sm" id="editButton">Edit</a></td>
+        <td><a th:href="'/items/delete?itemId=' + ${item.id}" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModalCenter"id="deleteButton">Delete</a></td>
     </tr>
-</table>
 
+</table>
+    </div>
+    <div  class="tableFixHead" th:if="${#lists.isEmpty(items)}" >
+        <table>
+            <tr>
+                <td width="42%">
+
+                </td>
+                <td>
+                    <p class="error" th:text="${itemSearch}"></p>
+                </td>
+            </tr>
+        </table>
+    </div>
+<footer th:replace="fragments :: footer"></footer>
+</form>
 </body>
 </html>
+

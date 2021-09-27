@@ -10,7 +10,7 @@
     <br>
 <form method="post">
     <div class="form-floating w-25">
-        <input th:field="${loginFormDTO.email}" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+        <input th:field="${loginFormDTO.email}" type="email" class="form-control" id="floatingInput" autofocus="autofocus"  placeholder="name@example.com">
         <label for="floatingInput">Email address</label>
         <p class="error" th:errors="${loginFormDTO.email}"></p>
     </div>

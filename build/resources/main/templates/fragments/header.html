@@ -1,0 +1,36 @@
+<html xmlns:th="http://www.thymeleaf.org/">
+<body>
+<div th:fragment="myHeader" >
+    <meta charset="UTF-8"/>
+    <title>Closet Tracker</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+
+    <table class="logo">
+        <tr>
+            <td>
+                <label>Closet Tracker</label>
+            </td>
+        </tr>
+    </table>
+    <table class="menu-right" >
+        <tr>
+            <td width="13%">
+                <ul class="nav">
+                    <li><a href="/items">My Closet</a></li>
+                    <a style="color:white">&nbsp;|&nbsp; </a>
+                    <li><a href="/items/create-item">Add Item</a></li>
+                </ul>
+            </td>
+            <td width="87%">
+                <ul class="nav">
+                    <li><a href="/logout">Log out</a></li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

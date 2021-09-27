@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <div th:replace="fragments/header :: myHeader"></div>
+</head>
+<body class="container">
+<center>
+    <h5  style="color:black;">View Item</h5>
+
+    <form  action="/items/update-item" enctype="multipart/form-data">
+
+        <div>
+            <table class="albums">
+                <tr>
+                    <td width="40%">
+
+                    </td>
+                    <td align="left">
+                        <label>Item Name</label>
+                    </td>
+                    <td th:text="${item.itemName}"></td>
+                </tr>
+                <tr>
+                    <td>
+
+                    </td>
+                    <td>
+                        <label>Clothing Type</label>
+                    </td>
+                    <td th:text="${item.type}"></td>
+                </tr>
+                <tr>
+                    <td>
+
+                    </td>
+                    <td>
+                        <label>Item Color</label>
+                    </td>
+                    <td th:text="${item.color}"></td>
+                </tr>
+                <tr>
+                    <td>
+
+                    </td>
+                    <td>
+                        <label>Item Size</label>
+                    </td>
+                    <td th:text="${item.size}"></td>
+                </tr>
+                <tr>
+                    <td>
+
+                    </td>
+                    <td>
+                        <label>Season</label>
+                    </td>
+                    <td th:text="${item.season}"></td>
+                </tr>
+                <tr>
+                    <td>
+
+                    </td>
+                    <td>
+                        <label>Item Image</label>
+                    </td>
+                    <td>
+                        <img width="150" height="150" class="card-img-top" th:src="@{${'/items/display/image/' + item.id}}" style="width:300px">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" align="center">
+                    <a href="/items" class="btn btn-primary btn-sm" id="viewButton">Back</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</center>
+</body>
+</html>

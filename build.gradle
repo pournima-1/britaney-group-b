@@ -22,6 +22,7 @@ dependencies {
 	implementation 'org.springframework.security:spring-security-crypto:5.5.1'
 
 
+
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
 	runtimeOnly 'mysql:mysql-connector-java'

@@ -1,6 +1,7 @@
 package org.launchcode.closettracker.models;
 
 public enum Season {
+    SELECT ("Select a season"),
     SPRING ("Spring"),
     SUMMER ("Summer"),
     FALL ("Fall"),

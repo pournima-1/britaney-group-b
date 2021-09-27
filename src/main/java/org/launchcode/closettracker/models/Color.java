@@ -1,6 +1,7 @@
 package org.launchcode.closettracker.models;
 
 public enum Color {
+    SELECT ("Select a color"),
     RED ("Red"),
     ORANGE ("Orange"),
     YELLOW ("Yellow"),

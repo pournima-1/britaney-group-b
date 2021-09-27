@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <div th:replace="fragments/header :: myHeader"></div>
+</head>
+<body class="container">
+<center>
+    <h5  style="color:black;">Edit Item</h5>
+
+    <form method="post" action="/items/update-item" enctype="multipart/form-data">
+       <!-- <div class="form-group">
+            <label>Item Id
+                <input class="form-control" th:field="${item.id}" name="itemId"/>
+            </label>
+            <p class="error" th:errors="${item.id}"></p>
+        </div>
+        <div class="form-group">
+            <label>Item name
+                <input class="form-control" th:field="${item.itemName}"/>
+            </label>
+            <p class="error" th:errors="${item.itemName}"></p>
+        </div>
+        <div class="form-group">
+            <label>Clothing Type
+                <input th:field="${item.type}" class="form-control" value="type"/>
+            </label>
+            <p class="error" th:errors="${item.type}"></p>
+        </div>
+        <div class="form-group">
+            <label for="color">Select a color:</label>
+            <select id="color" name="color" th:field="${item.color}">
+                <option th:each="color : ${T(org.launchcode.closettracker.models.Color).values()}"
+                        th:value="${color}" th:text="${color.displayName}"></option>
+            </select>
+            <p class="error" th:errors="${item.color}"></p>
+        </div>
+        <div class="form-group">
+            <label>Item size
+                <input th:field="${item.size}" class="form-control"/>
+            </label>
+            <p class="error" th:errors="${item.size}"></p>
+        </div>
+        <div class="form-group">
+            <label for="seasons">Choose a season:</label>
+            <select id="seasons" name="seasons" th:field="${item.season}">
+                <option th:each="season : ${T(org.launchcode.closettracker.models.Season).values()}"
+                        th:value="${season}" th:text="${season.displayName}"></option>
+            </select>
+            <p class="error" th:errors="${item.season}"></p>
+        </div>
+        <div>
+            <label > Image </label>
+            <div class="form-group" >
+                <input type="file" name="image" accept="image/png,image/jpg, image/jpeg" />
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Update" class="btn btn-success"/>
+        </div>-->
+        <div class="form-group">
+            <table>
+                <tr>
+                    <td width="30%">
+
+                    </td>
+                    <td>
+                        <label>Item Name</label><span style="color:red">*</span>
+                    </td>
+                    <td>
+                        <input th:field="${item.itemName}"/>
+                        <p class="error" th:text="${itemNameError}"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td >
+
+                    </td>
+                    <td>
+                        <label>Clothing Type</label><span style="color:red">*</span>
+                    </td>
+                    <td>
+                        <input th:field="${item.type}" value="type"/>
+                        <p class="error" th:text="${itemTypeError}"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td >
+
+                    </td>
+                    <td>
+                        <label for="color">Item Color</label><span style="color:red">*</span>
+                    </td>
+                    <td>
+                        <select id="color" name="color" th:field="${item.color}">
+                            <option th:each="color : ${T(org.launchcode.closettracker.models.Color).values()}"
+                                    th:value="${color}" th:text="${color.displayName}"></option>
+                        </select>
+                        <p class="error" th:text="${itemError}"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td >
+
+                    </td>
+                    <td>
+                        <label>Item Size</label><span style="color:red">*</span>
+                    </td>
+                    <td>
+                        <input th:field="${item.size}" />
+                        <p class="error" th:text="${itemSizeError}"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td >
+
+                    </td>
+                    <td>
+                        <label for="seasons">Season</label><span style="color:red">*</span>
+                    </td>
+                    <td>
+                        <select id="seasons" name="seasons" th:field="${item.season}">
+                            <option th:each="season : ${T(org.launchcode.closettracker.models.Season).values()}"
+                                    th:value="${season}" th:text="${season.displayName}"></option>
+                        </select>
+                        <p class="error" th:text="${itemSeasonError}"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+
+                    </td>
+                    <td>
+                        <label>Existing Image</label>
+                    </td>
+                    <td>
+                        <img width="150" height="150" class="card-img-top" th:src="@{${'/items/display/image/' + item.id}}" style="width:300px">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+
+                    </td>
+                    <td>
+                        <label>Change Existing Image</label>
+                    </td>
+                    <td>
+                        <input type="file" name="image" accept="image/png,image/jpg, image/jpeg" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="right">
+                        <input type="submit" value="update" class="btn btn-success btn-sm"/>
+                    </td>
+                    <td>
+                        <a href="/items" class="btn btn-danger btn-sm" id="cancelButton">Cancel</a>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+    </form>
+</center>
+</body>
+</html>

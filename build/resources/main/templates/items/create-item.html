@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
-<head th:replace="fragments :: head">
+<head>
+    <div th:replace="fragments/header :: myHeader"></div>
     <meta charset="UTF-8">
     <title th:text="${title}"></title>
 </head>
 <body class="container">
+<!--<header th:replace="fragments :: navigation"></header>-->
 <center>
-<h1>Create Item</h1>
+    <h5  style="color:black;">Add Item</h5>
 
 <form method="post" enctype="multipart/form-data">
-    <div class="form-group">
+    <!--<div class="form-group">
         <label>Item name
             <input class="form-control" th:field="${item.itemName}"/>
         </label>
@@ -44,13 +46,101 @@
         <p class="error" th:errors="${item.season}"></p>
     </div>
     <div>
-        <label > Image </label>
-        <div class="form-group" >
-            <input type="file" name="image" accept="image/png,image/jpg, image/jpeg" />
+        <label> Image </label>
+        <div class="form-group">
+            <input type="file" name="image" accept="image/png,image/jpg, image/jpeg"/>
         </div>
     </div>
     <div class="form-group">
         <input type="submit" value="Create item" class="btn btn-success"/>
+    </div>-->
+
+    <div class="form-group">
+        <table>
+            <tr>
+                <td width="30%">
+
+                </td>
+                <td>
+                    <label>Item Name</label><span style="color:red">*</span>
+                </td>
+                <td>
+                    <input  th:field="${item.itemName}"/>
+                    <p class="error" th:text="${itemNameError}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td >
+
+                </td>
+                <td>
+                    <label>Clothing Type</label><span style="color:red">*</span>
+                </td>
+                <td>
+                    <input th:field="${item.type}" value="type"/>
+                    <p class="error" th:text="${itemTypeError}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td >
+
+                </td>
+                <td>
+                    <label for="color">Item Color</label><span style="color:red">*</span>
+                </td>
+                <td>
+                    <select id="color" name="color" th:field="${item.color}">
+                        <option th:each="color : ${T(org.launchcode.closettracker.models.Color).values()}"
+                                th:value="${color}" th:text="${color.displayName}"></option>
+                    </select>
+                    <p class="error" th:text="${itemError}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td >
+
+                </td>
+                <td>
+                    <label>Item Size</label><span style="color:red">*</span>
+                </td>
+                <td>
+                    <input th:field="${item.size}" />
+                    <p class="error" th:text="${itemSizeError}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td >
+
+                </td>
+                <td>
+                    <label for="seasons">Season</label><span style="color:red">*</span>
+                </td>
+                <td>
+                    <select id="seasons" name="seasons" th:field="${item.season}">
+                        <option th:each="season : ${T(org.launchcode.closettracker.models.Season).values()}"
+                                th:value="${season}" th:text="${season.displayName}"></option>
+                    </select>
+                    <p class="error" th:text="${itemSeasonError}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td >
+
+                </td>
+                <td>
+                    <label>Item Image</label><span style="color:red">*</span>
+                </td>
+                <td>
+                    <input type="file" name="image" accept="image/png,image/jpg, image/jpeg"/>
+                    <p class="error" th:text="${itemImageError}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" align="center">
+                    <input type="submit" value="Create item" class="btn btn-success"/>
+                </td>
+            </tr>
+        </table>
     </div>
 </form>
 </center>
